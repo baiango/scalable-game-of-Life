@@ -1,0 +1,224 @@
+#include "cdef.c"
+#include <SDL2/SDL.h>
+use Compiler Explorer to test your code out or learn.
+https://godbolt.org/
+or use "root" if you want it on your computer. (No ASM converter included)
+https://root.cern/install/
+use online Python to test your math formula. try this.
+https://www.online-python.com/
+# Python:
+a,b = 14, 3
+print(f"{a} % {b} = {a-(a//b)*b}")
+print(f"{a} % {b}\n= {a-(a//b)*b}\n", end="")
+get Cppcheck to find security vulnerability and bugs for you.
+http://cppcheck.net/
+You will need a person to read the code for you.
+get JetBrains Mono for your editor! and leave Consolas in dust! It's awful!
+https://www.jetbrains.com/lp/mono/
+
+
+If you failed to follow any of these rules, don't be discouraged.
+Fix the code and try it again. Or just take a break.
+Or just dump in todo list and forget about it. Cause you ain't going to use it anyways.
+It's supposed to be hard. If it wasn't hard, everyone would do it.
+(You going to lose your job if everyone can do it.) The hard is what makes it great.
+You can also break the rules, when the rules are making the code harder to read. (rarely)
+
+
+git:
+credit: https://rogerdudler.github.io/git-guide/
+To make a new local git repository:
+git init
+
+To push commits:
+git add *
+git commit -m "first"
+git add *
+git commit -m "second"
+git diff 80ceb31 9c687f5
+
+To revert to old commits:
+git reflog
+
+a43efad (HEAD -> master) HEAD@{0}: reset: moving to a43efad
+80ceb31 HEAD@{1}: reset: moving to 80ceb31
+a43efad (HEAD -> master) HEAD@{2}: commit: third
+9c687f5 HEAD@{3}: commit: second
+80ceb31 HEAD@{4}: commit (initial): first
+
+git reset --hard 9c687f5
+git reset --hard a43efad
+
+
+credits:
+Linux kernel: https://www.kernel.org/doc/Documentation/process/coding-style.rst
+Julia: https://docs.julialang.org/en/v1/manual/style-guide/
+GDScript: https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html
+Unix philosophy: https://en.wikipedia.org/wiki/Unix_philosophy
+You aren't gonna need it: https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it
+Don't repeat yourself: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
+SOLID: https://en.wikipedia.org/wiki/SOLID
+Model–view–controller: https://en.wikipedia.org/wiki/Model–view–controller
+
+
+files:
+files name always in lowercase with no separator.
+Model–view–controller theory:
+User -> Controller -> Model -> View
+So user sent inputs to the controller,
+then Controller sent the input to Model to update variables.
+And then the Model save and sent the results to View to show to the user.
+
+User -> Controller -> Model -> Controller -> View
+But in this case, the Model actually do 2 things. Which is not what you wanted.
+It's supposed to only save the data, not to controlling View to show the data.
+so I recommend you sent it back to the Controller to deal with it.
+
+In a nutshell, use Controller to control View, and pass the calculation to the Model.
+main.c as the controller.
+engineu0.c as the calculator or the "model".
+guimgr.c as the graphic interface manager or the "view".
+
+
+codes:
+put your todo in todo.c and not littering your code around in the source codes.
+put the functions declarations before your todo code to tell where should be put.
+and prefix "+" to say this is the code that you wanted to put in for people.
+example:
+typedef struct {
+	union {
+	} uni;
+} var;
+
+
++//static void _Oseti32(var* variant, i32 n)
++//{	variant->uni.i32 = n;
++//	variant->type = Ti32; }
+
+
+static void _printfOverload(var * variant)
+
+
+you should keep under 80 characters and 48 lines per functions.
+unless you create a mess by doing it. the hard limit is 100 characters.
+(terminal emulator size is 80x24)
+
+use Pico indentation style.
+use 8-character tab indentation.
+should no more than 3 indent levels.
+	if you did more than 3.
+	it's a sign of you should break down into another functions.
+(unless it's continuation lines)
+2 indent levels instead of 1 for continuation lines.
+"case" should be with "switch" in the same indent level,
+or just do not indent "case".
+examples:
+switch (errorCode)
+{case Undef:
+{	printf("Undefined error! Quitting now...");
+	break; }}
+do not do this:
+switch (errorCode)
+{	case Undef:
+	{	printf("Undefined error! Quitting now...");
+		break; }}
+do not put multiple statements on a single line.
+X:	if (!mem) _OraiseError(OOM);
+O:	if (!mem)
+		_OraiseError(OOM);
+and multiple assignments on a single line too. unless it's global constants.
+
+
+lowercase for letters in hexadecimal numbers.
+X: 0xFF37F1F758180525
+O: 0xff37'f1f7'5818'0525
+sperate numbers with single quote if it is over 1'000'000.
+comments start with a space, but not commented out code.
+// print me!
+//printf("Hi!");
+do not leave whitespace at the end of lines.
+
+do not use "inline", as it will not fit in CPU Cache due to increased size.
+and the second reason is, it will increase code boilerplates.
+third reason, LTO can do this for you without the code boilerplates.
+
+
+variables:
+#define or global constants should be UPPER_SNAKE_CASE, for example "NULL_WINDOW".
+do not shorten the global variable name.
+	unless the normal form is over 10 characters long.
+declare local variables as close as possible to their first use.
+local variables should no more than 7 per function.
+
+use "tmp, tmp2, tmp3" as generic temporary variable name.
+use "ret" for generic return variable name.
+pointer declaration should be near variables name instead of type name.
+like "char *linux_banner;", instead of "char* linux_banner;".
+
+use at least 3 characters for your variables name, and do not use 1 or 2
+characters. for "Add Selection To Next Find Match" or Ctrl-D compatible reason.
+if the name is too long, use local variables to shorten it temporary.
+
+
+functions:
+start with camelCase.
+it should be do one thing and do it well. (Unix philosophy)
+the output, should be built for input of other unknown functions. (Unix philosophy)
+make a new function when you actually use it immediately. (You aren't gonna need it)
+https://miro.medium.com/v2/resize:fit:1400/format:webp/1*uvlfqAYf9mbgUXPCPwwIFw.png
+the article: https://betterprogramming.pub/yagni-you-aint-gonna-need-it-f9a178cd8e1
+when the function is too complex, use local variables to simplify it first.
+if didn't worked out, break down to multiple functions. (abstractions and DRY principle)
+
+prefix _ if it is intended to be globally used. (priority 0)
+(mark as public functions)
+prefix H if it is modifying the global variables. (priority 1)
+you are most likely want to use this for GUI functions.
+(mark as high risk functions)
+prefix O if it or its functions did modify their arguments
+or its local variables. (priority 2)
+(mark as impure functions or as Object-oriented programming
+	and warns people do not attempting to parallelize it.
+	as this will requires mutex, which is a quite forced idea.
+	there's always another way to parallelize.
+	so don't give up and try it somewhere else.
+	The function should always return the same output with the same input.
+	if not, mark as impure.)
+(Note: Modify local variables does not make it impure and could be making the
+	program slightly faster. but I recommend throwing that local variables
+	out and create a new one to do it. As is it is bug prone.)
+(_ has more priority than O)
+prefix S if it is intended to be safer than the original function. (priority 3)
+(mark as safety functions)
+(probably not with O)
+
+if the function can fit characters under 80 in one line and it's 3 line calls, do it.
+do not shorten or use abbreviation the function name,
+	use descriptive or relatable name for functions.
+	unless the normal form is over 10 characters long.
+	(example) write RNG instead of randomNumberGenerator.
+2 lines to separate between functions.
+
+
+sturcts and enums:
+start with PascalCase.
+rename the type with typedef to explain the functions input.
+example:
+	static const SDL_Event *NULL_EVENT = NULL;
+	static const u0 NOT_QUIT = false;
+	GameEvent Evt = { NULL_EVENT, NOT_QUIT };
+instead of:
+	GameEvent Evt = { NULL, false };
+
+prefer static const over #define. Because #define has no type, like void *.
+which is very bad. As type checking get thrown away.
+
+
+commenting:
+only comments to expain why or what it does, not to explain how it works.
+if you have explain the code to make sense of it, just rewrite your code.
+you can write a comment to warn about possible dodgy or unsafe codes.
+
+
+strings:
+do not use contractions for words. do not use "dont" or "don't", use "do not".
