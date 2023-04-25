@@ -1,0 +1,5 @@
+how to compile?
+1.	"make dependency.cmd" to compile the required dependency
+2.	Open the .sln file. And press "Local Windows Debugger" to run it.
+2a.	If there's object defined or missing .dll error,
+	press Ctrl+Q and type rebuild and click on it to fully recompile.
