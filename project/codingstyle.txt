@@ -50,6 +50,8 @@ a43efad (HEAD -> master) HEAD@{2}: commit: third
 git reset --hard 9c687f5
 git reset --hard a43efad
 
+or just use GitHub Desktop:
+https://desktop.github.com/
 
 credits:
 Linux kernel: https://www.kernel.org/doc/Documentation/process/coding-style.rst
