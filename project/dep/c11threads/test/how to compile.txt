@@ -1,0 +1,9 @@
+1.	open your "x64 Native Tools Command Prompt for VS 2019" shortcut.
+2.	run "nmake" to check if nmake exist.
+3.	grab your test directory by right clicking "Copy address as text" from file
+	explorer.
+4.	change to this directory by "cd "testDirectory""
+5.	"dir" to see if cmd is in "testDirectory" and it looks like your
+	"testDirectory".
+5.	compile with "nmake Makefile.msvc".
+6.	run the program in cmd to keep the console prints.
